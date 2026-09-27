@@ -1,25 +1,44 @@
-name: Publish to npm
+# Publishes this n8n community node package to npm on every version tag push.
+#
+# Starting May 1 2026, n8n requires all community nodes to be published via
+# GitHub Actions with npm provenance statements. This workflow satisfies that
+# requirement.
+#
+# Release process: run `npm run release` locally to bump the version,
+# changelog, commit, tag, and push — which triggers this workflow.
+
+name: Publish
 
 on:
-  release:
-    types: [published]
-
-permissions:
-  contents: read
-  id-token: write
+  push:
+    tags:
+      - '*.*.*'
+      - 'v*.*.*'
 
 jobs:
   publish:
+    name: Publish to npm
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org
-      - run: npm install
-      - run: npm run lint
-      - run: npm run build
-      - run: npm publish --provenance --access public
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Release
+        run: |
+          [ -n "$NPM_TOKEN" ] && npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          npm run release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
