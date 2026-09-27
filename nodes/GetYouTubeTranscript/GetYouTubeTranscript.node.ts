@@ -37,12 +37,41 @@ export class GetYouTubeTranscript implements INodeType {
 				type: 'options',
 				noDataExpression: true,
 				options: [
+					{ name: 'Account', value: 'account' },
 					{ name: 'Channel', value: 'channel' },
 					{ name: 'Playlist', value: 'playlist' },
 					{ name: 'Search', value: 'search' },
 					{ name: 'Transcript', value: 'transcript' },
 				],
 				default: 'transcript',
+			},
+
+			// ---------------------------------------------------------------
+			// Operation - Account
+			// ---------------------------------------------------------------
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: { resource: ['account'] },
+				},
+				options: [
+					{
+						name: 'Get Credits',
+						value: 'getCredits',
+						action: 'Get credits',
+						description: 'Check the remaining credit balance and plan for this key (free)',
+						routing: {
+							request: {
+								method: 'GET',
+								url: '/credits',
+							},
+						},
+					},
+				],
+				default: 'getCredits',
 			},
 
 			// ---------------------------------------------------------------

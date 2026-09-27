@@ -6,14 +6,15 @@
  * Standalone live test against the real GetYouTubeTranscript API.
  *
  * Confirms request construction (correct paths, optional params dropped when
- * empty) and response parsing (expected shape on success) for three
+ * empty) and response parsing (expected shape on success) for four
  * operations, without needing the n8n runtime.
  *
  * Requires GYT_API_KEY in the environment. Run with:
  *   GYT_API_KEY=sk_live_... npm run test:live
  *
- * Budget note: this hits two free endpoints (/resolve, /channel/latest) and
- * one paid endpoint (/transcript, 1 credit) - see README "Development" section.
+ * Budget note: this hits three free endpoints (/resolve, /channel/latest,
+ * /credits) and one paid endpoint (/transcript, 1 credit) - see README
+ * "Development" section.
  */
 
 import { buildUrl } from './buildRequest';
@@ -101,6 +102,24 @@ async function main() {
 		check('success: true', body.success === true, body);
 		const data = getPath(body, ['data']);
 		check('data is an object', typeof data === 'object' && data !== null, body);
+	}
+
+	console.log('\nOperation: Get Credits (/credits, free)');
+	{
+		const { status, body, url } = await call('/credits', {});
+		console.log(`  GET ${url}`);
+		check('HTTP 200', status === 200, { status, body });
+		check('success: true', body.success === true, body);
+		check(
+			'data.plan_credits_left is a number',
+			typeof getPath(body, ['data', 'plan_credits_left']) === 'number',
+			body,
+		);
+		check(
+			'data.plan is a known plan value',
+			['free', 'monthly', 'yearly'].includes(getPath(body, ['data', 'plan']) as string),
+			body,
+		);
 	}
 
 	console.log('\nOperation: Get Transcript (/transcript, 1 credit)');

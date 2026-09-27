@@ -7,7 +7,7 @@ An [n8n](https://n8n.io) community node for the [GetYouTubeTranscript](https://g
 
 ## What this is
 
-This package adds one node — **GetYouTubeTranscript** — with seven operations mapped to the [GetYouTubeTranscript API](https://getyoutubetranscript.com/docs):
+This package adds one node — **GetYouTubeTranscript** — with eight operations mapped to the [GetYouTubeTranscript API](https://getyoutubetranscript.com/docs):
 
 | Operation | Endpoint | Cost |
 |---|---|---|
@@ -18,6 +18,7 @@ This package adds one node — **GetYouTubeTranscript** — with seven operation
 | Search Channel Videos | `GET /channel/search` | 1 credit |
 | List Channel Videos | `GET /channel/videos` | 1 credit |
 | List Playlist Videos | `GET /playlist` | 1 credit |
+| Get Credits | `GET /credits` | Free |
 
 Failed and rate-limited requests are never charged. Full API reference: [getyoutubetranscript.com/docs](https://getyoutubetranscript.com/docs).
 
@@ -94,7 +95,7 @@ npm run lint
 GYT_API_KEY=sk_live_... npm run test:live
 ```
 
-It calls two free endpoints (`/resolve`, `/channel/latest`) and one paid endpoint (`/transcript`, 1 credit) once each.
+It calls three free endpoints (`/resolve`, `/channel/latest`, `/credits`) and one paid endpoint (`/transcript`, 1 credit) once each.
 
 ## Docs
 
