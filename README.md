@@ -5,6 +5,14 @@ An [n8n](https://n8n.io) community node for the [GetYouTubeTranscript](https://g
 [![License](https://img.shields.io/badge/License-MIT-4CAF50?style=for-the-badge)](./LICENSE)
 [![Website](https://img.shields.io/badge/Website-getyoutubetranscript.com-FF3B00?style=for-the-badge)](https://getyoutubetranscript.com)
 
+## Demo
+
+An n8n AI Agent using the GetYouTubeTranscript node as a tool to fetch and summarize a video:
+
+[![AI Agent calling the GetYouTubeTranscript tool](./docs/ai-agent-demo.gif)](./docs/demo.mp4)
+
+[Watch the full 2.5-minute walkthrough (with narration)](./docs/demo.mp4): installing the node from npm, creating and testing the credential, Get Transcript, Search YouTube, and using the node as an AI Agent tool.
+
 ## What this is
 
 This package adds one node — **GetYouTubeTranscript** — with eight operations mapped to the [GetYouTubeTranscript API](https://getyoutubetranscript.com/docs):
@@ -68,7 +76,9 @@ curl -X POST https://getyoutubetranscript.com/api/v1/signup/verify \
 
 ## Example workflow
 
-A simple "summarize a channel's latest video" flow:
+Ready to import: [`examples/workflows/summarize-youtube-video-with-ai.json`](./examples/workflows/summarize-youtube-video-with-ai.json) fetches a video's transcript and summarizes it with OpenAI. In n8n, open a new workflow and paste the file's contents onto the canvas (or use **Import from File**), then attach your GetYouTubeTranscript and OpenAI credentials.
+
+Another pattern, "summarize a channel's latest video":
 
 1. **Manual Trigger** (or a Schedule/Webhook trigger with a channel handle in the payload).
 2. **GetYouTubeTranscript** node, operation **Get Channel Latest Videos**, `Channel` = `@mkbhd` — returns the channel's metadata and most recent uploads.
