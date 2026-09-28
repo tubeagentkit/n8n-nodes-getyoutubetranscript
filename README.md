@@ -145,6 +145,15 @@ It calls three free endpoints (`/resolve`, `/channel/latest`, `/credits`) and on
 
 Full API reference, error codes, and rate limits: [getyoutubetranscript.com/docs](https://getyoutubetranscript.com/docs).
 
+## Related projects
+
+Other ways to use the [GetYouTubeTranscript API](https://getyoutubetranscript.com):
+
+- [youtube-mcp](https://github.com/tubeagentkit/youtube-mcp): Remote YouTube MCP server for Claude, ChatGPT, Cursor and VS Code
+- [youtube-transcript-skills](https://github.com/tubeagentkit/youtube-transcript-skills): YouTube transcript Agent Skill for Claude Code, Cursor, Codex and OpenClaw
+- [python-sdk](https://github.com/tubeagentkit/python-sdk): YouTube Transcript API SDK for Python
+- [node-sdk](https://github.com/tubeagentkit/node-sdk): YouTube Transcript API SDK for Node.js / TypeScript
+
 ## License
 
 [MIT](./LICENSE)
