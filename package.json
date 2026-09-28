@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-getyoutubetranscript",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "n8n community node for the GetYouTubeTranscript API - YouTube transcripts, search, channel, and playlist data",
 	"license": "MIT",
 	"homepage": "https://getyoutubetranscript.com",
@@ -17,7 +17,7 @@
 	],
 	"author": {
 		"name": "tubeagentkit",
-		"email": "hello@tubeagentkit.dev"
+		"email": "pantdeepakk5@gmail.com"
 	},
 	"repository": {
 		"type": "git",
