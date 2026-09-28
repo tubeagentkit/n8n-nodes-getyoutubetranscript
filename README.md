@@ -10,7 +10,6 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/n8n-nodes-getyoutubetranscript"><img src="https://img.shields.io/npm/v/n8n-nodes-getyoutubetranscript?style=for-the-badge&color=FF3B00&label=npm" alt="npm version"></a>
-  <a href="https://www.npmjs.com/package/n8n-nodes-getyoutubetranscript"><img src="https://img.shields.io/npm/dm/n8n-nodes-getyoutubetranscript?style=for-the-badge&color=EA4B71" alt="npm downloads"></a>
   <a href="https://docs.n8n.io/integrations/community-nodes/"><img src="https://img.shields.io/badge/n8n-community%20node-EA4B71?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n community node"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-4CAF50?style=for-the-badge" alt="MIT license"></a>
   <a href="https://getyoutubetranscript.com"><img src="https://img.shields.io/badge/Website-getyoutubetranscript.com-FF3B00?style=for-the-badge" alt="Website"></a>
