@@ -1,9 +1,27 @@
-# n8n-nodes-getyoutubetranscript
+<p align="center">
+  <img src="./nodes/GetYouTubeTranscript/getyoutubetranscript.svg" alt="GetYouTubeTranscript logo" width="88">
+</p>
 
-An [n8n](https://n8n.io) community node for the [GetYouTubeTranscript](https://getyoutubetranscript.com) API — pull YouTube transcripts, search videos and channels, resolve channel handles, and browse channels and playlists, directly inside your n8n workflows.
+<h1 align="center">n8n-nodes-getyoutubetranscript</h1>
 
-[![License](https://img.shields.io/badge/License-MIT-4CAF50?style=for-the-badge)](./LICENSE)
-[![Website](https://img.shields.io/badge/Website-getyoutubetranscript.com-FF3B00?style=for-the-badge)](https://getyoutubetranscript.com)
+<p align="center">
+  An <a href="https://n8n.io">n8n</a> community node for the <a href="https://getyoutubetranscript.com">GetYouTubeTranscript</a> API: pull YouTube transcripts, search videos and channels, resolve channel handles, and browse channels and playlists, directly inside your n8n workflows. Works as an AI Agent tool too.
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/n8n-nodes-getyoutubetranscript"><img src="https://img.shields.io/npm/v/n8n-nodes-getyoutubetranscript?style=for-the-badge&color=FF3B00&label=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/n8n-nodes-getyoutubetranscript"><img src="https://img.shields.io/npm/dm/n8n-nodes-getyoutubetranscript?style=for-the-badge&color=EA4B71" alt="npm downloads"></a>
+  <a href="https://docs.n8n.io/integrations/community-nodes/"><img src="https://img.shields.io/badge/n8n-community%20node-EA4B71?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n community node"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-4CAF50?style=for-the-badge" alt="MIT license"></a>
+  <a href="https://getyoutubetranscript.com"><img src="https://img.shields.io/badge/Website-getyoutubetranscript.com-FF3B00?style=for-the-badge" alt="Website"></a>
+</p>
+
+<p align="center">
+  <a href="https://getyoutubetranscript.com"><b>Get a free API key</b></a> (100 credits, no card) ·
+  <a href="https://getyoutubetranscript.com/docs">API docs</a> ·
+  <a href="./examples/workflows/summarize-youtube-video-with-ai.json">Example workflow</a> ·
+  <a href="./docs/demo.mp4">Demo video</a>
+</p>
 
 ## Demo
 
@@ -12,6 +30,23 @@ An n8n AI Agent using the GetYouTubeTranscript node as a tool to fetch and summa
 [![AI Agent calling the GetYouTubeTranscript tool](./docs/ai-agent-demo.gif)](./docs/demo.mp4)
 
 [Watch the full 2.5-minute walkthrough (with narration)](./docs/demo.mp4): installing the node from npm, creating and testing the credential, Get Transcript, Search YouTube, and using the node as an AI Agent tool.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%" valign="top"><b>8 actions in one node</b><br><img src="./docs/images/actions.png" alt="GetYouTubeTranscript actions list in the n8n node picker" width="260"></td>
+    <td width="50%" valign="top"><b>One-field credential, tested on save</b><br><img src="./docs/images/credential-test.png" alt="Credential test passing in n8n"></td>
+  </tr>
+  <tr>
+    <td valign="top"><b>Get Transcript</b>: title, language and full text<br><img src="./docs/images/get-transcript.png" alt="Get Transcript output in n8n"></td>
+    <td valign="top"><b>Search YouTube</b>: videos with channel, views and length<br><img src="./docs/images/search-youtube.png" alt="Search YouTube output in n8n"></td>
+  </tr>
+  <tr>
+    <td valign="top"><b>AI Agent tool</b>: the model fills in the video URL<br><img src="./docs/images/ai-agent-tool.png" alt="AI Agent calling the GetYouTubeTranscript tool"></td>
+    <td valign="top"><b>Example workflow</b>: transcript to OpenAI summary<br><img src="./docs/images/example-workflow.png" alt="Summarize a YouTube video with AI workflow"></td>
+  </tr>
+</table>
 
 ## What this is
 
