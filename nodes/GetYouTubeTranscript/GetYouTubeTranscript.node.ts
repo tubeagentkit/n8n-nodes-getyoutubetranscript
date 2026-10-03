@@ -254,6 +254,19 @@ export class GetYouTubeTranscript implements INodeType {
 					send: { type: 'query', property: 'language', value: '={{$value || undefined}}' },
 				},
 			},
+			{
+				displayName: 'Include Timestamps',
+				name: 'timestamps',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to also return segments: one {start, duration, text} per caption line, times in seconds',
+				displayOptions: {
+					show: { resource: ['transcript'], operation: ['getTranscript'] },
+				},
+				routing: {
+					send: { type: 'query', property: 'timestamps', value: '={{$value || undefined}}' },
+				},
+			},
 
 			// ---------------------------------------------------------------
 			// Fields - Search YouTube

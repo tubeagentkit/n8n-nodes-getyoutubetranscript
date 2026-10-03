@@ -62,6 +62,8 @@ This package adds one node — **GetYouTubeTranscript** — with eight operation
 | List Playlist Videos | `GET /playlist` | 1 credit |
 | Get Credits | `GET /credits` | Free |
 
+**Get Transcript** has an optional **Include Timestamps** toggle (off by default). When on, the output gains a `data.segments` array with one `{start, duration, text}` item per caption line, with times in seconds. It still costs 1 credit, and with the toggle off the request and response are unchanged.
+
 Failed and rate-limited requests are never charged. Full API reference: [getyoutubetranscript.com/docs](https://getyoutubetranscript.com/docs).
 
 ## Install
