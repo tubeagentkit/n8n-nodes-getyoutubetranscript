@@ -146,7 +146,7 @@ export class GetYouTubeTranscript implements INodeType {
 						name: 'Get Channel Latest Videos',
 						value: 'getChannelLatestVideos',
 						action: 'Get channel latest videos',
-						description: "Get a channel's metadata and latest uploads (free)",
+						description: "Get a channel's details and its newest uploads (1 credit)",
 						routing: {
 							request: {
 								method: 'GET',
@@ -170,7 +170,7 @@ export class GetYouTubeTranscript implements INodeType {
 						name: 'Resolve Channel',
 						value: 'resolveChannel',
 						action: 'Resolve channel',
-						description: 'Resolve a channel handle or URL to a channel ID (free)',
+						description: 'Resolve a channel handle or URL to a channel ID (1 credit)',
 						routing: {
 							request: {
 								method: 'GET',

@@ -12,8 +12,8 @@
  * Requires GYT_API_KEY in the environment. Run with:
  *   GYT_API_KEY=sk_live_... npm run test:live
  *
- * Budget note: this hits three free endpoints (/resolve, /channel/latest,
- * /credits) and one paid endpoint (/transcript, 1 credit) - see README
+ * Budget note: this hits one free endpoint (/credits) and three paid ones
+ * (/resolve, /channel/latest and /transcript, 1 credit each) - see README
  * "Development" section.
  */
 
@@ -85,7 +85,7 @@ async function main() {
 	check('"page_token" is present', withToken.includes('page_token=abc123'), withToken);
 
 	// --- Live checks ---
-	console.log('\nOperation: Resolve Channel (/resolve, free)');
+	console.log('\nOperation: Resolve Channel (/resolve, 1 credit)');
 	{
 		const { status, body, url } = await call('/resolve', { handle: 'youtube' });
 		console.log(`  GET ${url}`);
@@ -94,7 +94,7 @@ async function main() {
 		check('data.channel_id is a string', typeof getPath(body, ['data', 'channel_id']) === 'string', body);
 	}
 
-	console.log('\nOperation: Get Channel Latest Videos (/channel/latest, free)');
+	console.log('\nOperation: Get Channel Latest Videos (/channel/latest, 1 credit)');
 	{
 		const { status, body, url } = await call('/channel/latest', { channel: 'youtube' });
 		console.log(`  GET ${url}`);

@@ -55,8 +55,8 @@ This package adds one node — **GetYouTubeTranscript** — with eight operation
 |---|---|---|
 | Get Transcript | `GET /transcript` | 1 credit |
 | Search YouTube | `GET /search` | 1 credit |
-| Resolve Channel | `GET /resolve` | Free |
-| Get Channel Latest Videos | `GET /channel/latest` | Free |
+| Resolve Channel | `GET /resolve` | 1 credit |
+| Get Channel Latest Videos | `GET /channel/latest` | 1 credit |
 | Search Channel Videos | `GET /channel/search` | 1 credit |
 | List Channel Videos | `GET /channel/videos` | 1 credit |
 | List Playlist Videos | `GET /playlist` | 1 credit |
@@ -92,7 +92,7 @@ The node authenticates with a **GetYouTubeTranscript API** credential — a sing
 2. Grab your key from the [dashboard](https://getyoutubetranscript.com/dashboard). Keys look like `sk_live_...`.
 3. In n8n, create a new **GetYouTubeTranscript API** credential and paste the key in.
 
-The credential's "Test" button calls the free `/resolve` endpoint, so validating a key never spends a credit.
+The credential's "Test" button calls the free `/credits` endpoint, so validating a key never spends a credit.
 
 ### Self-serve signup (no dashboard visit)
 
@@ -141,7 +141,7 @@ npm run lint
 GYT_API_KEY=sk_live_... npm run test:live
 ```
 
-It calls three free endpoints (`/resolve`, `/channel/latest`, `/credits`) and one paid endpoint (`/transcript`, 1 credit) once each.
+It calls one free endpoint (`/credits`) and three paid ones (`/resolve`, `/channel/latest` and `/transcript`, 1 credit each) once each.
 
 ## Docs
 

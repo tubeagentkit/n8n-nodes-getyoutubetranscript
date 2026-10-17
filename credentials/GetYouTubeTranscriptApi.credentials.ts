@@ -39,15 +39,12 @@ export class GetYouTubeTranscriptApi implements ICredentialType {
 		},
 	};
 
-	// /resolve is a free (0-credit) endpoint, so testing the credential never spends a credit.
+	// /credits is the one free (0-credit) endpoint, so testing the credential never spends a credit.
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: 'https://getyoutubetranscript.com/api/v1',
-			url: '/resolve',
+			url: '/credits',
 			method: 'GET',
-			qs: {
-				handle: 'youtube',
-			},
 		},
 	};
 }
