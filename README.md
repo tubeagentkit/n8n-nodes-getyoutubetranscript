@@ -53,7 +53,7 @@ This package adds one node — **GetYouTubeTranscript** — with eight operation
 
 | Operation | Endpoint | Cost |
 |---|---|---|
-| Get Transcript | `GET /transcript` | 1 credit |
+| Get Transcript | `GET /transcript` | 1 credit (AI transcripts: 3 per minute of video) |
 | Search YouTube | `GET /search` | 1 credit |
 | Resolve Channel | `GET /resolve` | 1 credit |
 | Get Channel Latest Videos | `GET /channel/latest` | 1 credit |
@@ -63,6 +63,20 @@ This package adds one node — **GetYouTubeTranscript** — with eight operation
 | Get Credits | `GET /credits` | Free |
 
 **Get Transcript** has an optional **Include Timestamps** toggle (off by default). When on, the output gains a `data.segments` array with one `{start, duration, text}` item per caption line, with times in seconds. It still costs 1 credit, and with the toggle off the request and response are unchanged.
+
+### AI transcripts for videos without captions
+
+**Get Transcript** also has a **Mode** option:
+
+| Mode | What you get | Cost |
+| --- | --- | --- |
+| Native (default) | Captions only | 1 credit |
+| Auto | Captions if the video has any, otherwise an AI speech-to-text transcript | 1 credit for captions, AI price otherwise |
+| Generate | Always an AI transcript | AI price |
+
+The AI price is 3 credits per minute of video, rounded up, minimum 3, for videos up to 4 hours. Reading your own AI transcript again within 24 hours costs 0, and credits are refunded automatically if it fails. AI transcripts have `data.caption_type` and `data.source` set to `"ai"`, plus `data.duration_seconds`. With an AI mode, **Language** is the language spoken in the video; leave it empty to use the video's own audio language.
+
+A long video is transcribed in the background. The node then checks the job every 5 seconds (free) for up to **Max Wait (Seconds)** (default 600) and outputs the transcript when it is ready. If it is not ready in time, or Max Wait is 0, the output is the job instead (`data: null`, `job.job_id`, `job.status`); fetch it later with an HTTP Request node on `GET /api/v1/transcript/jobs?id=<job_id>` using the same credential. A failed job stops the node with its error (for example `AI_FAILED`).
 
 Failed and rate-limited requests are never charged. Full API reference: [getyoutubetranscript.com/docs](https://getyoutubetranscript.com/docs).
 

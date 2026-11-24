@@ -1,4 +1,5 @@
 import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from 'n8n-workflow';
+import { API_BASE_URL, waitForAiTranscript } from './aiTranscript';
 
 export class GetYouTubeTranscript implements INodeType {
 	description: INodeTypeDescription = {
@@ -25,7 +26,7 @@ export class GetYouTubeTranscript implements INodeType {
 			},
 		],
 		requestDefaults: {
-			baseURL: 'https://getyoutubetranscript.com/api/v1',
+			baseURL: API_BASE_URL,
 			headers: {
 				Accept: 'application/json',
 			},
@@ -90,11 +91,15 @@ export class GetYouTubeTranscript implements INodeType {
 						name: 'Get Transcript',
 						value: 'getTranscript',
 						action: 'Get transcript',
-						description: 'Get the transcript of a YouTube video (1 credit)',
+						description:
+							'Get the transcript of a YouTube video (1 credit). With Mode Auto or Generate, an AI transcript for videos without captions (3 credits per minute of video).',
 						routing: {
 							request: {
 								method: 'GET',
 								url: '/transcript',
+							},
+							output: {
+								postReceive: [waitForAiTranscript],
 							},
 						},
 					},
@@ -246,7 +251,8 @@ export class GetYouTubeTranscript implements INodeType {
 				type: 'string',
 				default: '',
 				placeholder: 'en',
-				description: 'Caption language code, e.g. "en", "es". Defaults to "en" if left empty.',
+				description:
+					'Caption language code, e.g. "en", "es". Defaults to "en" if left empty. With Mode Auto or Generate, the language spoken in the video; leave empty to use the video\'s own audio language.',
 				displayOptions: {
 					show: { resource: ['transcript'], operation: ['getTranscript'] },
 				},
@@ -265,6 +271,54 @@ export class GetYouTubeTranscript implements INodeType {
 				},
 				routing: {
 					send: { type: 'query', property: 'timestamps', value: '={{$value || undefined}}' },
+				},
+			},
+			{
+				displayName: 'Mode',
+				name: 'mode',
+				type: 'options',
+				options: [
+					{
+						name: 'Auto',
+						value: 'auto',
+						description:
+							'Captions if the video has any (1 credit), otherwise an AI speech-to-text transcript (3 credits per minute of video)',
+					},
+					{
+						name: 'Generate',
+						value: 'generate',
+						description: 'Always an AI speech-to-text transcript (3 credits per minute of video, minimum 3)',
+					},
+					{
+						name: 'Native',
+						value: 'native',
+						description: 'Captions only (1 credit)',
+					},
+				],
+				default: 'native',
+				description:
+					'Where the transcript comes from. AI transcripts cost 3 credits per minute of video, rounded up, minimum 3, for videos up to 4 hours. Reading your own AI transcript again within 24 hours costs 0, and credits are refunded if it fails.',
+				displayOptions: {
+					show: { resource: ['transcript'], operation: ['getTranscript'] },
+				},
+				routing: {
+					send: {
+						type: 'query',
+						property: 'mode',
+						value: '={{$value === "native" ? undefined : $value}}',
+					},
+				},
+			},
+			{
+				displayName: 'Max Wait (Seconds)',
+				name: 'aiMaxWaitSeconds',
+				type: 'number',
+				typeOptions: { minValue: 0 },
+				default: 600,
+				description:
+					'A long AI transcript is made in the background. Wait up to this many seconds for it, checking every 5 seconds (free). If it is not ready by then, or this is 0, the output is the job (job.job_id, job.status) to check later.',
+				displayOptions: {
+					show: { resource: ['transcript'], operation: ['getTranscript'], mode: ['auto', 'generate'] },
 				},
 			},
 
